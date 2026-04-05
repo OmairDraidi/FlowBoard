@@ -1,5 +1,7 @@
 # 🚀 FlowBoard
 
+[![Live Demo On Vercel](https://img.shields.io/badge/Live_Demo-Try_FlowBoard_Now!-10b981?style=for-the-badge&logo=vercel)](https://flow-board-olive.vercel.app/)
+
 FlowBoard is a modern, premium Kanban-style task management application designed for seamless productivity and beautiful user experiences. Built to be fast, responsive, and visually stunning using React and Tailwind CSS v4.
 
 ## ✨ Features
