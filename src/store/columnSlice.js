@@ -1,6 +1,6 @@
 import { generateId } from '@/lib/id';
 
-export const createColumnSlice = (set, get) => ({
+export const createColumnSlice = (set) => ({
   columns: {}, // Record<string, Column>
 
   addColumn: (boardId, title, color = '#64748b') => {

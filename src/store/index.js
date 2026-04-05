@@ -22,7 +22,7 @@ export const useBoardStore = create(
       name: 'flowboard-storage',
       version: 1,
       storage: createJSONStorage(() => localStorage),
-      onRehydrateStorage: (state) => {
+      onRehydrateStorage: () => {
         return (hydratedState, error) => {
           if (error) {
             console.error('An error occurred during hydration', error);

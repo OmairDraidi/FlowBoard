@@ -1,6 +1,6 @@
 import { generateId } from '@/lib/id';
 
-export const createLabelSlice = (set, get) => ({
+export const createLabelSlice = (set) => ({
   labels: {}, // Record<string, Label>
 
   addLabel: (boardId, name, color) => {

@@ -1,7 +1,7 @@
 import { generateId } from '@/lib/id';
 import { PRIORITIES } from '@/lib/constants';
 
-export const createTaskSlice = (set, get) => ({
+export const createTaskSlice = (set) => ({
   tasks: {}, // Record<string, Task>
 
   addTask: (columnId, title, description = '') => {
