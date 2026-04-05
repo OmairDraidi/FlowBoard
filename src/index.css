@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #131319;
+  --color-surface-low: #1b1b21;
+  --color-surface-lower: #111116;
+  --color-surface-bright: #393840;
+  --color-surface-variant: #35343b;
+  --color-primary-indigo: #c0c1ff;
+  --color-primary-container: #8083ff;
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-slate-100;
+    @apply font-sans antialiased selection:bg-primary-indigo selection:text-indigo-950;
+    background-color: #0a0a10; /* True background from Stitch */
+  }
+
+  /* Smooth scrolling for the kanban board */
+  * {
+    scrollbar-gutter: stable;
+  }
+
+  /* Custom scrollbar for webkit */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
