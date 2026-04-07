@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Dropdown } from '@/components/ui/Dropdown';
 import { LabelPicker } from '@/features/label/components/LabelPicker';
+import { Checklist } from '@/features/subtask/components/Checklist';
 
 /**
  * Task Form component.
@@ -99,6 +100,9 @@ export const TaskForm = memo(function TaskForm({ taskId, onClose }) {
             className="w-full min-h-[160px] bg-surface-bright/20 border border-slate-700/50 rounded-2xl p-4 text-sm text-slate-300 focus:outline-none focus:border-indigo-500 focus:bg-surface-bright/30 transition-all resize-none custom-scrollbar leading-relaxed"
          />
       </div>
+
+      {/* Checklist Integration */}
+      <Checklist taskId={taskId} />
 
       {/* Label Picker Integration */}
       <LabelPicker 

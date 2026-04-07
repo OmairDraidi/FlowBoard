@@ -195,6 +195,33 @@ Phased implementation plan for FlowBoard. Each phase builds on the previous one.
 
 ---
 
+---
+
+## Phase 9: Sub-Tasks & Checklists 🆕
+**Estimated effort: ~2 sessions**
+**Plan: `plans/active/09-subtask-checklist.md`**
+
+- [ ] Step 1: Create `store/subtaskSlice.js` with CRUD + toggle + reorder
+- [ ] Step 2: Update `taskSlice.js` — add `subtaskIds[]` + cascade delete
+- [ ] Step 3: Integrate into `store/index.js` — slice + migration v1→v2 + selectors
+- [ ] Step 4: Build `ChecklistProgress.jsx` — animated progress bar
+- [ ] Step 5: Build `ChecklistItem.jsx` — checkbox + inline edit + delete
+- [ ] Step 6: Build `Checklist.jsx` — container + quick-add input
+- [ ] Step 7: Integrate `<Checklist>` into `TaskForm.jsx`
+- [ ] Step 8: Add mini progress indicator to `TaskCard.jsx`
+- [ ] Step 9: Update `constants.js` with checklist colors
+- [ ] Step 10: Polish, test, and verify migration
+
+**Acceptance criteria:**
+- Users can add/toggle/edit/delete checklist items inside tasks
+- Progress bar shows completion percentage in TaskModal
+- TaskCard shows mini `✅ 3/7` badge for tasks with subtasks
+- Cascade delete: deleting a task removes all its subtasks
+- Old localStorage data (v1) migrates cleanly to v2
+- No console errors, responsive on mobile
+
+---
+
 ## Implementation Order (Dependency Graph)
 
 ```
@@ -206,6 +233,7 @@ Phase 1 (Setup)
         │           └── Phase 6 (Drag & Drop)
         │               └── Phase 7 (Filters)
         │                   └── Phase 8 (Polish)
+        │                       └── Phase 9 (Sub-Tasks & Checklists) 🆕
 ```
 
 Each phase must be fully complete before starting the next.

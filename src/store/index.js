@@ -5,11 +5,16 @@ import { createBoardSlice } from './boardSlice';
 import { createColumnSlice } from './columnSlice';
 import { createTaskSlice } from './taskSlice';
 import { createLabelSlice } from './labelSlice';
+import { createSubtaskSlice } from './subtaskSlice';
 
 /**
  * FlowBoard Root Store
  * Uses Immer for easy nested updates and Persist for localStorage.
  */
+
+const EMPTY_SUBTASKS = [];
+const EMPTY_PROGRESS = { completed: 0, total: 0, percentage: 0 };
+
 export const useBoardStore = create(
   persist(
     immer((...args) => ({
@@ -17,11 +22,27 @@ export const useBoardStore = create(
       ...createColumnSlice(...args),
       ...createTaskSlice(...args),
       ...createLabelSlice(...args),
+      ...createSubtaskSlice(...args),
     })),
     {
       name: 'flowboard-storage',
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
+      migrate: (persistedState, version) => {
+        if (version === 1) {
+          // Add subtasks object if it doesn't exist
+          if (!persistedState.subtasks) {
+            persistedState.subtasks = {};
+          }
+          // Add subtaskIds to all existing tasks
+          Object.values(persistedState.tasks || {}).forEach((task) => {
+            if (!task.subtaskIds) {
+              task.subtaskIds = [];
+            }
+          });
+        }
+        return persistedState;
+      },
       onRehydrateStorage: () => {
         return (hydratedState, error) => {
           if (error) {
@@ -90,4 +111,30 @@ export const selectActiveBoardLabels = (state) => {
   const board = selectActiveBoard(state);
   if (!board) return [];
   return board.labelIds.map((id) => state.labels[id]).filter(Boolean);
+};
+
+/**
+ * Returns subtasks for a specific task in order.
+ */
+export const selectSubtasksByTask = (state, taskId) => {
+  const task = state.tasks[taskId];
+  if (!task || !task.subtaskIds || task.subtaskIds.length === 0) return EMPTY_SUBTASKS;
+  return task.subtaskIds.map((id) => state.subtasks[id]).filter(Boolean);
+};
+
+/**
+ * Returns progress data for a specific task.
+ */
+export const selectTaskProgress = (state, taskId) => {
+  const task = state.tasks[taskId];
+  if (!task || !task.subtaskIds || task.subtaskIds.length === 0) {
+    return EMPTY_PROGRESS;
+  }
+
+  const subtasks = task.subtaskIds.map((id) => state.subtasks[id]).filter(Boolean);
+  const total = subtasks.length;
+  const completed = subtasks.filter((s) => s.isCompleted).length;
+  const percentage = Math.round((completed / total) * 100);
+
+  return { completed, total, percentage };
 };

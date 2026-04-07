@@ -3,7 +3,7 @@ import { formatDistanceToNow, isPast, isToday } from 'date-fns';
 import { useShallow } from 'zustand/react/shallow';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { useBoardStore } from '@/store';
+import { useBoardStore, selectTaskProgress } from '@/store';
 import { useModal } from '@/context/ModalContext';
 import { TaskPriorityBadge } from './TaskPriorityBadge';
 import { LabelBadge } from '@/features/label/components/LabelBadge';
@@ -20,6 +20,7 @@ export const TaskCard = memo(function TaskCard({ taskId }) {
       task?.labelIds?.map(id => s.labels[id]).filter(Boolean) || []
     )
   );
+  const progress = useBoardStore(useShallow((s) => selectTaskProgress(s, taskId)));
   const { openTaskModal } = useModal();
 
   if (!task) return null;
@@ -53,6 +54,24 @@ export const TaskCard = memo(function TaskCard({ taskId }) {
       <h3 className="text-sm font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors mb-4 line-clamp-2 leading-relaxed">
         {task.title}
       </h3>
+
+      {/* Progress Mini Bar (Phase 9) */}
+      {progress.total > 0 && (
+        <div className="mb-4 space-y-1.5">
+          <div className="flex justify-between items-center text-[10px] font-bold text-slate-500 uppercase tracking-tight">
+            <span>Progress</span>
+            <span className={progress.percentage === 100 ? 'text-green-400' : ''}>
+              {progress.percentage === 100 ? 'Done' : `${progress.completed}/${progress.total}`}
+            </span>
+          </div>
+          <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div 
+              className={`h-full transition-all duration-500 ${progress.percentage === 100 ? 'bg-green-500' : 'bg-indigo-500'}`}
+              style={{ width: `${progress.percentage}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Footer: Priority & Due Date */}
       <div className="flex items-center justify-between mt-auto pt-3 border-t border-slate-700/30">

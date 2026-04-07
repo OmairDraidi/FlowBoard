@@ -30,3 +30,10 @@ export const THEME_COLORS = {
   TEXT_PRIMARY: '#f1f5f9',
   TEXT_MUTED: '#64748b',
 };
+
+export const CHECKLIST_COLORS = {
+  empty: '#64748b',      // slate
+  inProgress: '#818cf8', // indigo
+  complete: '#22c55e',   // green
+};
+

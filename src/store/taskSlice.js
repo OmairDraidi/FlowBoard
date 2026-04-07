@@ -20,6 +20,7 @@ export const createTaskSlice = (set) => ({
         description,
         priority: PRIORITIES.NONE,
         labelIds: [],
+        subtaskIds: [],
         dueDate: null,
         createdAt: now,
         updatedAt: now,
@@ -68,6 +69,13 @@ export const createTaskSlice = (set) => ({
       // Update board updatedAt
       if (state.boards[task.boardId]) {
         state.boards[task.boardId].updatedAt = Date.now();
+      }
+
+      // Cascade delete subtasks
+      if (task.subtaskIds) {
+        task.subtaskIds.forEach((sid) => {
+          delete state.subtasks[sid];
+        });
       }
 
       delete state.tasks[id];
