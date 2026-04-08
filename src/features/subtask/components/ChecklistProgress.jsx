@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 /**
  * Visual progress bar for a checklist.
@@ -20,7 +20,7 @@ export const ChecklistProgress = memo(function ChecklistProgress({ completed, to
       </div>
 
       <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-        <motion.div
+        <Motion.div
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 0.5, ease: 'easeOut' }}

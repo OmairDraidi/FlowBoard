@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Dropdown } from '@/components/ui/Dropdown';
 import { LabelPicker } from '@/features/label/components/LabelPicker';
 import { Checklist } from '@/features/subtask/components/Checklist';
+import { RichTextEditor } from '@/components/ui/RichTextEditor';
 
 /**
  * Task Form component.
@@ -87,17 +88,14 @@ export const TaskForm = memo(function TaskForm({ taskId, onClose }) {
          </div>
       </div>
 
-      {/* Description Field */}
       <div className="flex flex-col gap-2">
          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
            Description
          </h4>
-         <textarea
+         <RichTextEditor
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            onBlur={() => handleUpdate({ description })}
-            placeholder="Add a more detailed description..."
-            className="w-full min-h-[160px] bg-surface-bright/20 border border-slate-700/50 rounded-2xl p-4 text-sm text-slate-300 focus:outline-none focus:border-indigo-500 focus:bg-surface-bright/30 transition-all resize-none custom-scrollbar leading-relaxed"
+            onChange={setDescription}
+            onBlur={(html) => handleUpdate({ description: html })}
          />
       </div>
 

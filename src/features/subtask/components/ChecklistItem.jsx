@@ -1,5 +1,5 @@
 import { useState, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/Input';
 
 /**
@@ -49,13 +49,13 @@ export const ChecklistItem = memo(function ChecklistItem({
       >
         <AnimatePresence mode="wait">
           {subtask.isCompleted && (
-            <motion.span
+            <Motion.span
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0 }}
             >
               ✓
-            </motion.span>
+            </Motion.span>
           )}
         </AnimatePresence>
       </button>

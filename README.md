@@ -13,6 +13,7 @@ FlowBoard is a modern, premium Kanban-style task management application designed
 - **Smart State Management:** Persistent data storage using Zustand + Immer + LocalStorage, ensuring you never lose your progress even after a refresh.
 - **Sub-Tasks & Checklists:** Break down complex tasks into smaller, manageable items with interactive progress tracking and inline editing.
 - **Responsive Layout:** Exquisite desktop sidebar and a mobile navigation drawer for managing multiple boards gracefully on any device.
+- **Rich Text Editor:** A fully-featured rich text editor (Tiptap) for task descriptions with support for markdown, lists, code blocks, and more.
 
 ## 🛠️ Tech Stack
 
@@ -76,7 +77,7 @@ We are actively developing **FlowBoard** to become a fully-fledged enterprise to
 
 - [ ] **Backend & Cloud Sync:** Transitioning from `LocalStorage` to a robust cloud database (PostgreSQL / Supabase).
 - [ ] **Real-Time Collaboration:** Integrating WebSockets (Socket.io) for live multiplayer board editing.
-- [ ] **Rich Text Formatting:** Adding a full Markdown editor for task descriptions and comments.
+- [x] **Rich Text Formatting:** Adding a full Markdown editor for task descriptions and comments.
 - [x] **Advanced Sub-Tasks:** Support for nested sub-tasks and interactive checklists.
 - [ ] **Calendar & Analytics:** A dedicated timeline view and productivity dashboard.
 - [ ] **Authentication System:** Secure multi-user login (JWT/OAuth) and workspace sharing.

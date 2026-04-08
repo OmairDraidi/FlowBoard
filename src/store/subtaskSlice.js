@@ -1,6 +1,6 @@
 import { generateId } from '@/lib/id';
 
-export const createSubtaskSlice = (set, get) => ({
+export const createSubtaskSlice = (set) => ({
   subtasks: {}, // Record<string, Subtask>
 
   addSubtask: (taskId, title) => {
